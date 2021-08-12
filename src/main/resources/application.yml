@@ -1,0 +1,46 @@
+server:
+  port: 8383
+
+  jetty:
+    threads:
+      min: 300
+      max: 3000
+      selectors: 300
+      acceptors: 300
+      max-queue-capacity: 3000
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+    application-display-name: Camel-Spring-jpa
+    session:
+      cookie:
+        http-only: true
+      tracking-modes: cookie
+
+
+camel:
+  springboot:
+    main-run-controller: true
+    name: CamelServlet
+    consumer-template-cache-size: 3000
+    endpoint-lazy-start-producer: true
+    exchange-factory-capacity: 1000
+    producer-template-cache-size: 3000
+    tracing: true
+  component:
+    bean:
+      scope: singleton
+    class:
+      lazy-start-producer: true
+    direct:
+      lazy-start-producer: true
+    http:
+      max-total-connections: 1000
+      connection-request-timeout: 30000
+      connections-per-route: 700
+      lazy-start-producer: true
+
+  servlet:
+    mapping:
+      context-path: /services/camel/*
